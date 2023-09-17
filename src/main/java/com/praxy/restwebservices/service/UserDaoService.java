@@ -19,7 +19,17 @@ public class UserDaoService {
         return users;
     }
 
-    public User getUserById(Integer id) {
+    public User getUserById(final Integer id) {
         return users.stream().filter(u -> u.getId() == id).findFirst().get();
+    }
+
+    public List<User> deleteUserById(final Integer id) {
+        users.removeIf(user -> user.getId() == id);
+        return users;
+    }
+
+    public List<User> createUser(final User user) {
+        users.add(user);
+        return users;
     }
 }

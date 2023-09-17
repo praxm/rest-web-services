@@ -2,10 +2,9 @@ package com.praxy.restwebservices.resource;
 
 import com.praxy.restwebservices.model.User;
 import com.praxy.restwebservices.service.UserDaoService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,6 +21,16 @@ public class HelloController {
     @GetMapping(path = "/users/{id}")
     public User getUserById(@PathVariable("id") Integer id) {
         return userDaoService.getUserById(id);
+    }
+
+    @DeleteMapping(path = "/user/{id}")
+    public List<User> deleteUserById(@PathVariable("id")Integer id) {
+        return userDaoService.deleteUserById(id);
+    }
+
+    @PostMapping(path = "/user")
+    public List<User> createUser(@Valid @RequestBody User user) {
+        return userDaoService.createUser(user);
     }
 
 }
