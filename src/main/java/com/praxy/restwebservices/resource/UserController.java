@@ -1,5 +1,6 @@
 package com.praxy.restwebservices.resource;
 
+import com.praxy.restwebservices.model.Post;
 import com.praxy.restwebservices.model.User;
 import com.praxy.restwebservices.service.UserDaoService;
 import jakarta.validation.Valid;
@@ -10,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class HelloController {
+public class UserController {
     private final UserDaoService userDaoService;
 
     @GetMapping(path = "/users")
@@ -23,8 +24,13 @@ public class HelloController {
         return userDaoService.getUserById(id);
     }
 
+    @GetMapping(path = "/users/{id}/posts")
+    public List<Post> retrivePostsForUser(@PathVariable("id")Integer id) {
+        return userDaoService.getPostsForUser(id);
+    }
+
     @DeleteMapping(path = "/user/{id}")
-    public List<User> deleteUserById(@PathVariable("id")Integer id) {
+    public List<User> deleteUserById(@PathVariable("id") Integer id) {
         return userDaoService.deleteUserById(id);
     }
 
